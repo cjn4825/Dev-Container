@@ -11,11 +11,12 @@ To learn more about containerization and eventually expain to include more secur
 * [docker](https://docs.docker.com/engine/install/)
 
 # How to build image
-''' 
+'''Bash
   git clone git@github.com/cjn4825/Dev-Container
   cd Dev-Container
   # don't have to do sudo if root
   sudo docker build -t {image name of your choosing} .
   sudo coker build -it {image name}
 '''
+
 
