@@ -6,7 +6,7 @@ I have not tested if this works in different environments, and this is just work
 # Goal
 To learn more about containerization and eventually expain to include more security, functionality, and automation.
 
-# dependencies
+# Dependencies
 * [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * [docker](https://docs.docker.com/engine/install/)
 
@@ -18,3 +18,4 @@ To learn more about containerization and eventually expain to include more secur
   sudo docker build -t {image name of your choosing} .
   sudo coker build -it {image name}
 '''
+
