@@ -17,12 +17,13 @@ To learn more about containerization and eventually expain to include more secur
 
 # How to build image
 ```bash
-git clone git@github.com/cjn4825/Dev-Container
+git clone https://github.com/cjn4825/Dev-Container
 cd Dev-Container
 # don't have to do sudo if root
 sudo docker build -t <image-name> .
 sudo doker run -it <image-name>
 ```
+
 
 
 
