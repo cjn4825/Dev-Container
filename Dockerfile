@@ -64,7 +64,7 @@ RUN git clone https://github.com/tmux-plugins/tpm \
 # download dotfiles and run bootstrap script to link files
 RUN git clone https://github.com/cjn4825/.dotfiles \
     ${MAINDIR}/.dotfiles \ 
-    $$ ./${MAINDIR}/.dotfiles/scripts/bootstrap.sh
+    $$ .${MAINDIR}/.dotfiles/scripts/bootstrap.sh
 
 
 # back when i didn't use symlinks ... will remove later
