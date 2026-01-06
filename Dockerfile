@@ -66,13 +66,6 @@ RUN git clone https://github.com/cjn4825/.dotfiles \
     ${MAINDIR}/.dotfiles
 
 # run bootstrapping script to link dot files to dirs
-RUN .${MAINDIR}/.dotfiles/scripts/bootstrap.sh
+RUN ${MAINDIR}/.dotfiles/scripts/bootstrap.sh
 
-# back when i didn't use symlinks ... will remove later
-# ARG DOTFILES=${MAINDIR}/.dotfiles
-#RUN mv ${DOTFILES}/nvim ${MAINDIR}/.config/
-#RUN mv ${DOTFILES}/tmux/.tmux.conf ${MAINDIR}/.tmux.conf
-#RUN mv ${DOTFILES}/tmux/.tmux ${MAINDIR}/.tmux
-#RUN mv ${DOTFILES}/bash/.bashrc.d/prompt.sh ${MAINDIR}/.bashrc.d/prompt.sh
-
-CMD ["/usr/bin/env bash"]
+CMD ["bash"]
