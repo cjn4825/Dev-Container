@@ -1,8 +1,7 @@
 FROM fedora:43
 
 # TODO:
-    # get working and remove any unnessesary packages like debugging
-    # get regular networking tools such as ip a working...or actually no? since it will be used to ssh into other systems or should i do that via normal host?
+    # get working and remove any unnessesary packages like debugging in nvim
     # fix error code when starting nvim
     # auto get nvim to download packages
     # hardening research
@@ -12,15 +11,21 @@ FROM fedora:43
 
 # update system and install dependencies
 RUN dnf update -y && dnf install -y \
+    bash \
     neovim \
     git \
-    neovim \
     curl \
     tmux \
     python3 \
     ansible \
     python3-pip \
     npm \
+    procps-ng \
+    util-linux \
+    iproute \
+    iputils \
+    net-tools \
+    ca-certificates \
     && dnf clean all
 
 # python tooling
@@ -56,14 +61,17 @@ WORKDIR ${MAINDIR}
 RUN git clone https://github.com/tmux-plugins/tpm \
     ${MAINDIR}/.tmux/plugins/tpm
 
-# download dot files and move to dir
-RUN git clone https://github.com/cjn4825/Dev-Dotfiles \
-    ${MAINDIR}/dotfiles
+# download dotfiles and run bootstrap script to link files
+RUN git clone https://github.com/cjn4825/.dotfiles \
+    ${MAINDIR}/.dotfiles \ 
+    $$ ./${MAINDIR}/.dotfiles/scripts/bootstrap.sh
 
-RUN mv ${MAINDIR}/dotfiles/nvim ${MAINDIR}/.config/
-RUN mv ${MAINDIR}/dotfiles/tmux/.tmux.conf ${MAINDIR}/.tmux.conf
-RUN mv ${MAINDIR}/dotfiles/tmux/.tmux ${MAINDIR}/.tmux
-RUN mv ${MAINDIR}/dotfiles/bash/.bashrc.d/prompt.sh ${MAINDIR}/.bashrc.d/prompt.sh
-RUN rm -rf ${MAINDIR}/dotfiles
 
-CMD ["/bin/bash"]
+# back when i didn't use symlinks ... will remove later
+# ARG DOTFILES=${MAINDIR}/.dotfiles
+#RUN mv ${DOTFILES}/nvim ${MAINDIR}/.config/
+#RUN mv ${DOTFILES}/tmux/.tmux.conf ${MAINDIR}/.tmux.conf
+#RUN mv ${DOTFILES}/tmux/.tmux ${MAINDIR}/.tmux
+#RUN mv ${DOTFILES}/bash/.bashrc.d/prompt.sh ${MAINDIR}/.bashrc.d/prompt.sh
+
+CMD ["/usr/bin/env bash"]
