@@ -6,8 +6,10 @@ FROM fedora:43
     # auto get nvim to download packages
     # hardening research
 
-# NOTES:
-    # pass environment variables to container in runtime not baked into container...specifically vault keys in my case for now
+# set environment variables for Go and Cargo Dependencies for some neovim plugins
+ENV GOPATH=/go
+ENV CARGO_HOME=/usr/local/cargo
+ENV PATH=$GOPATH/bin:$CARGO_HOME/bin:$PATH
 
 # update system and install dependencies
 RUN dnf update -y && dnf install -y \
@@ -16,6 +18,17 @@ RUN dnf update -y && dnf install -y \
     git \
     curl \
     tmux \
+    wget \
+    unzip \
+    tar \
+    xz \
+    make \
+    gcc \
+    gcc-c++ \
+    lua \
+    lua-devel \
+    luarocks \
+    cargo \
     python3 \
     ansible \
     python3-pip \
@@ -26,7 +39,20 @@ RUN dnf update -y && dnf install -y \
     iputils \
     net-tools \
     ca-certificates \
+    nodejs
     && dnf clean all
+
+# go install
+ENV GO_VERSION=1.21.1
+RUN wget https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz -O /tmp/go.tar.gz && \
+    tar -C /usr/local -xzf /tmp/go.tar.gz && \
+    rm -f /tmp/go.tar.gz
+
+# Configure Go environment variables
+ENV PATH=/usr/local/go/bin:$PATH
+
+# install jsregexp
+npm install -g jsregexp
 
 # python tooling
 RUN pip3 install \
