@@ -39,7 +39,7 @@ RUN dnf update -y && dnf install -y \
     iputils \
     net-tools \
     ca-certificates \
-    nodejs
+    nodejs \
     && dnf clean all
 
 # go install
