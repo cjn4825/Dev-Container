@@ -40,6 +40,7 @@ RUN dnf update -y && dnf install -y \
     net-tools \
     ca-certificates \
     nodejs \
+    vim \
     && dnf clean all
 
 # go install
@@ -52,7 +53,7 @@ RUN wget https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz -O /tmp/go.tar.gz 
 ENV PATH=/usr/local/go/bin:$PATH
 
 # install jsregexp
-RUN npm install -g jsregexp
+RUN luarocks install jsregexp
 
 # python tooling
 RUN pip3 install \
