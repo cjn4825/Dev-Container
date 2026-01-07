@@ -7,9 +7,9 @@ FROM fedora:43
     # hardening research
 
 # set environment variables for Go and Cargo Dependencies for some neovim plugins
-ENV GOPATH=/go
-ENV CARGO_HOME=/usr/local/cargo
-ENV PATH=$GOPATH/bin:$CARGO_HOME/bin:$PATH
+#ENV GOPATH=/go
+#ENV CARGO_HOME=/usr/local/cargo
+#ENV PATH=$GOPATH/bin:$CARGO_HOME/bin:$PATH
 
 # update system and install dependencies
 RUN dnf update -y && dnf install -y \
@@ -24,40 +24,36 @@ RUN dnf update -y && dnf install -y \
     xz \
     make \
     gcc \
-    gcc-c++ \
     lua \
     lua-devel \
     luarocks \
+    terraform \
+    shellcheck \
     cargo \
     python3 \
     ansible \
     python3-pip \
-    npm \
     procps-ng \
     util-linux \
     iproute \
     iputils \
-    net-tools \
     ca-certificates \
     nodejs \
-    vim \
+    ripgrep \
+    fd-find \
     && dnf clean all
 
-# go install
-ENV GO_VERSION=1.21.1
-RUN wget https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz -O /tmp/go.tar.gz && \
-    tar -C /usr/local -xzf /tmp/go.tar.gz && \
-    rm -f /tmp/go.tar.gz
-
-# Configure Go environment variables
-ENV PATH=/usr/local/go/bin:$PATH
+# fedora ln link for telescope plugin
+RUN ln -s /usr/bin/fdfind /usr/bin/fd
 
 # install jsregexp
 RUN luarocks install jsregexp
 
 # python tooling
 RUN pip3 install \
-    pynvim
+    pynvim \
+    ansible-lint \
+    yamllint
 
 # node tooling for language servers
 RUN npm install -g \
