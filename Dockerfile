@@ -6,11 +6,6 @@ FROM fedora:43
     # auto get nvim to download packages
     # hardening research
 
-# set environment variables for Go and Cargo Dependencies for some neovim plugins
-#ENV GOPATH=/go
-#ENV CARGO_HOME=/usr/local/cargo
-#ENV PATH=$GOPATH/bin:$CARGO_HOME/bin:$PATH
-
 # update system and install dependencies
 RUN dnf update -y && dnf install -y \
     bash \
@@ -21,46 +16,26 @@ RUN dnf update -y && dnf install -y \
     wget \
     unzip \
     tar \
+    gtar \
+    gzip \
     xz \
     make \
     gcc \
     lua \
-    lua-devel \
-    luarocks \
     terraform \
     shellcheck \
-    cargo \
     python3 \
     ansible \
-    python3-pip \
     procps-ng \
     util-linux \
     iproute \
+    wl-copy \
     iputils \
     ca-certificates \
     nodejs \
     ripgrep \
     fd-find \
     && dnf clean all
-
-# fedora ln link for telescope plugin
-RUN ln -s /usr/bin/fdfind /usr/bin/fd
-
-# install jsregexp
-RUN luarocks install jsregexp
-
-# python tooling
-RUN pip3 install \
-    pynvim \
-    ansible-lint \
-    yamllint
-
-# node tooling for language servers
-RUN npm install -g \
-    neovim \
-    typescript \
-    bash-language-server \
-    yaml-language-server
 
 # creates build time variable for user's name
 ARG DEVUSER=devuser
@@ -90,5 +65,8 @@ RUN git clone https://github.com/cjn4825/.dotfiles \
 
 # run bootstrapping script to link dot files to dirs
 RUN ${MAINDIR}/.dotfiles/scripts/bootstrap.sh
+
+# resets font cache
+RUN fc-cache -fv
 
 CMD ["bash"]
