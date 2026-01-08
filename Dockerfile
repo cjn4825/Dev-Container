@@ -22,9 +22,9 @@ RUN dnf update -y && dnf install -y \
     make \
     gcc \
     lua \
-    terraform \
     shellcheck \
     python3 \
+    pip3\
     ansible \
     procps-ng \
     util-linux \
@@ -32,10 +32,15 @@ RUN dnf update -y && dnf install -y \
     wl-copy \
     iputils \
     ca-certificates \
+    npm \
     nodejs \
     ripgrep \
     fd-find \
+    fontconfig \
     && dnf clean all
+
+# installs treesitter cli dependency
+RUN npm install -g tree-sitter-cli
 
 # creates build time variable for user's name
 ARG DEVUSER=devuser
@@ -49,6 +54,7 @@ RUN mkdir -p \
     ${MAINDIR}/.config \
     ${MAINDIR}/.bashrc.d \
     ${MAINDIR}/.tmux/plugins \
+    ${MAINDIR}/.local/share/fonts \
  && chown -R ${DEVUSER}:${DEVUSER} ${MAINDIR}
 
 # set user and init dir
@@ -67,6 +73,6 @@ RUN git clone https://github.com/cjn4825/.dotfiles \
 RUN ${MAINDIR}/.dotfiles/scripts/bootstrap.sh
 
 # resets font cache
-RUN fc-cache -fv
+RUN fc-cache
 
 CMD ["bash"]
