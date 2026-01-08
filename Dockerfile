@@ -16,15 +16,12 @@ RUN dnf update -y && dnf install -y \
     wget \
     unzip \
     tar \
-    gtar \
     gzip \
     xz \
     make \
     gcc \
-    lua \
     shellcheck \
     python3 \
-    pip3\
     ansible \
     procps-ng \
     util-linux \
@@ -32,7 +29,6 @@ RUN dnf update -y && dnf install -y \
     wl-copy \
     iputils \
     ca-certificates \
-    npm \
     nodejs \
     ripgrep \
     fd-find \
@@ -53,17 +49,12 @@ RUN useradd -m -s /bin/bash ${DEVUSER}
 RUN mkdir -p \
     ${MAINDIR}/.config \
     ${MAINDIR}/.bashrc.d \
-    ${MAINDIR}/.tmux/plugins \
     ${MAINDIR}/.local/share/fonts \
  && chown -R ${DEVUSER}:${DEVUSER} ${MAINDIR}
 
 # set user and init dir
 USER ${DEVUSER}
 WORKDIR ${MAINDIR}
-
-# download tmux plugin manager
-RUN git clone https://github.com/tmux-plugins/tpm \
-    ${MAINDIR}/.tmux/plugins/tpm
 
 # download dotfiles
 RUN git clone https://github.com/cjn4825/.dotfiles \
