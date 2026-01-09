@@ -3,5 +3,7 @@
   "build": {
     "dockerfile": "../Dockerfile"
   },
-  "postCreateCommand": "Dev environment created!"
+  "containerUser": "devuser",
+  "workspaceFolder": "/home/devuser",
+  "workspaceMount": "none"
 }
