@@ -50,7 +50,11 @@ RUN mkdir -p \
     ${MAINDIR}/.config \
     ${MAINDIR}/.bashrc.d \
     ${MAINDIR}/.local/share/fonts \
- && chown -R ${DEVUSER}:${DEVUSER} ${MAINDIR}
+ && chown -R ${DEVUSER}:${DEVUSER} ${MAINDIR} \
+ && chown -R ${DEVUSER}:${DEVUSER} /workspaces/dev
+ # should probably include logic in where if devpod is being used then do this
+ # should probably just change it where devpod is required or include script in this repo
+ # where you run it and it just pulls the dotfiles and runs the linking
 
 # set user and init dir
 USER ${DEVUSER}
@@ -63,7 +67,7 @@ RUN git clone https://github.com/cjn4825/.dotfiles \
 # run bootstrapping script to link dot files to dirs
 RUN ${MAINDIR}/.dotfiles/scripts/bootstrap.sh
 
-# resets font cache
+# resets font cache...should remove this since the font is based on the terminal emulator used no from inside the container
 RUN fc-cache
 
 CMD ["bash"]
