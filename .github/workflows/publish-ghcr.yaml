@@ -10,6 +10,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build and push the Image
         run: |
-          docker login --username cjn4825 --password ${{ secrets.GH_PAT  }} ghrc.io
+          docker login --username cjn4825 --password ${{ secrets.GH_PAT  }} ghcr.io
           docker build -t ghcr.io/cjn4825/dev:latest .
           docker push ghcr.io/cjn4825/dev:latest
