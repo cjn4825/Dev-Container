@@ -1,0 +1,7 @@
+{
+  "name": "DevPod Neovim Workspace",
+  "build": {
+    "dockerfile": "../Dockerfile"
+  },
+  "postCreateCommand": "Dev environment created!"
+}
