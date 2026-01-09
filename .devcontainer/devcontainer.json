@@ -4,6 +4,6 @@
     "dockerfile": "../Dockerfile"
   },
   "containerUser": "devuser",
-  "workspaceFolder": "/home/devuser",
-  "workspaceMount": "none"
+  "workspaceMount": "none",
+  "workspaceFolder": "/home/devuser"
 }
