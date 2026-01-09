@@ -1,7 +1,10 @@
 name: Docker Image CI for GHCR
 
 on:
-  push
+  push:
+    branches: [ master ]
+  repository_dispatch:
+    types: [ dotfiles_update_rebuild ]
 
 jobs:
   build_and_publish:
@@ -11,5 +14,5 @@ jobs:
       - name: Build and push the Image
         run: |
           docker login --username cjn4825 --password ${{ secrets.GH_PAT  }} ghcr.io
-          docker build -t ghcr.io/cjn4825/dev:latest .
+          docker build --no-cache -t ghcr.io/cjn4825/dev:latest .
           docker push ghcr.io/cjn4825/dev:latest
