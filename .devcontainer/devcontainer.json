@@ -3,6 +3,7 @@
   "build": {
     "dockerfile": "../Dockerfile"
   },
+  "containerUser": "devuser",
   "remoteUser": "devuser",
   "updateRemoteUserUID": true,
   "WorkspaceFolder": "/workspaces/dev"
