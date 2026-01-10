@@ -54,7 +54,7 @@ USER ${DEVUSER}
 WORKDIR ${MAINDIR}/workspace
 
 # test to see if devpod will read from this in the image
-LABEL "devcontainer.settings"='{"workspaceFolder": "/home/devuser/work", "remoteUser": "devuser"}'
+LABEL "devcontainer.settings"='{"workspaceFolder": "/home/devuser/workspace", "remoteUser": "devuser"}'
 
 # download dotfiles
 RUN git clone https://github.com/cjn4825/.dotfiles \
