@@ -4,5 +4,6 @@
     "dockerfile": "../Dockerfile"
   },
   "remoteUser": "devuser",
-  "updateRemoteUserUID": true
+  "updateRemoteUserUID": true,
+  "WorkspaceFolder": "/workspaces/dev"
 }

@@ -11,9 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build and push the Image
-        run: |
-          echo ${{ secrets.GH_PAT }} | docker login --username cjn4825 \
-          --password-stdin ghcr.io
-          docker build --no-cache -t ghcr.io/cjn4825/dev:latest .
-          docker push ghcr.io/cjn4825/dev:latest
+      - name: login to GHCR
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GH_PAT }}
+
+      - name: Build and push docker image
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: ghcr.io/cjn4825/dev:latest
+          no-cache: true

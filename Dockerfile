@@ -44,7 +44,7 @@ RUN mkdir -p \
 # set user
 USER ${DEVUSER}
 
-# workspace is set under the devcontainer convention + dev container name
+# set workdir to user home
 WORKDIR ${MAINDIR}
 
 # download dotfiles
