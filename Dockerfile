@@ -43,17 +43,17 @@ RUN groupadd -g ${DEVGID} ${DEVUSER} \
 RUN mkdir -p \
     ${MAINDIR}/.config \
     ${MAINDIR}/.bashrc.d \
-    ${MAINDIR}/workspace \
+    # ${MAINDIR}/workspace \
  && chown -R ${DEVUSER}:${DEVUSER} ${MAINDIR}
-
-# test label to see if this fixes directory access issue
-LABEL "devcontainer.settings"='{"workspaceFolder": "/home/devuser/workspace", "remoteUser": "devuser"}'
 
 # set user
 USER ${DEVUSER}
 
+# test label to see if this fixes directory access issue
+LABEL "devcontainer.settings"='{"workspaceFolder": "/workspaces", "remoteUser": "devuser"}'
+
 # set workdir
-WORKDIR ${MAINDIR}/workspace
+WORKDIR ${MAINDIR}
 
 # download dotfiles
 RUN git clone https://github.com/cjn4825/.dotfiles \
