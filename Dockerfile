@@ -16,7 +16,6 @@ RUN dnf update -y && dnf install -y \
     gcc \
     shellcheck \
     python3 \
-    ansible \
     procps-ng \
     util-linux \
     iproute \
@@ -47,14 +46,14 @@ RUN mkdir -p \
     ${MAINDIR}/workspace \
  && chown -R ${DEVUSER}:${DEVUSER} ${MAINDIR}
 
+# test label to see if this fixes directory access issue
+LABEL "devcontainer.settings"='{"workspaceFolder": "/home/devuser/workspace", "remoteUser": "devuser"}'
+
 # set user
 USER ${DEVUSER}
 
 # set workdir
 WORKDIR ${MAINDIR}/workspace
-
-# test to see if devpod will read from this in the image
-LABEL "devcontainer.settings"='{"workspaceFolder": "/home/devuser/workspace", "remoteUser": "devuser"}'
 
 # download dotfiles
 RUN git clone https://github.com/cjn4825/.dotfiles \
