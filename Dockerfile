@@ -43,8 +43,9 @@ RUN groupadd -g ${DEVGID} ${DEVUSER} \
 RUN mkdir -p \
     ${MAINDIR}/.config \
     ${MAINDIR}/.bashrc.d \
-    # ${MAINDIR}/workspace \
- && chown -R ${DEVUSER}:${DEVUSER} ${MAINDIR}
+    /workspaces \
+ && chown -R ${DEVUSER}:${DEVUSER} ${MAINDIR} \
+ && chown -R ${DEVUSER}:${DEVUSER} /workspaces
 
 # set user
 USER ${DEVUSER}
