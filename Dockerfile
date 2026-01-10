@@ -45,7 +45,7 @@ RUN mkdir -p \
 USER ${DEVUSER}
 
 # workspace is set under the devcontainer convention + dev container name
-WORKDIR /workspaces/dev
+WORKDIR ${MAINDIR}
 
 # download dotfiles
 RUN git clone https://github.com/cjn4825/.dotfiles \
