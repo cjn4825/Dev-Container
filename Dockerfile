@@ -32,8 +32,13 @@ RUN dnf update -y && dnf install -y \
 ARG DEVUSER=devuser
 ARG MAINDIR=/home/${DEVUSER}
 
-# add user and make shell
-RUN useradd -m -s /bin/bash ${DEVUSER}
+# create uid and gid values
+ARG DEVUID=1000
+ARG DEVGID=1000
+
+# create user with home dir with ID values for user and group
+RUN groupadd -g ${DEVGID} ${DEVUSER} \
+ && useradd -m -u ${DEVUID} -g ${DEVGID} -s /bin/bash ${DEVUSER}
 
 # create directorys and give user ownership
 RUN mkdir -p \
@@ -44,7 +49,7 @@ RUN mkdir -p \
 # set user
 USER ${DEVUSER}
 
-# set workdir to user home
+# set workdir
 WORKDIR ${MAINDIR}
 
 # download dotfiles
