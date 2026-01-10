@@ -41,15 +41,17 @@ RUN mkdir -p \
     ${MAINDIR}/.bashrc.d \
  && chown -R ${DEVUSER}:${DEVUSER} ${MAINDIR}
 
-# set user and init dir
+# set user
 USER ${DEVUSER}
-WORKDIR /workspace
+
+# workspace is set under the devcontainer convention + dev container name
+WORKDIR /workspace/dev
 
 # download dotfiles
 RUN git clone https://github.com/cjn4825/.dotfiles \
     ${MAINDIR}/.dotfiles
 
-# run bootstrapping script to link dotfiles to config locations
+# run bootstrapping script to link dotfiles to config locations and update Neovim
 RUN ${MAINDIR}/.dotfiles/scripts/bootstrap.sh
 
 CMD ["bash"]
