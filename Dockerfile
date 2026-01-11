@@ -43,18 +43,10 @@ RUN groupadd -g ${DEVGID} ${DEVUSER} \
 RUN mkdir -p \
     ${MAINDIR}/.config \
     ${MAINDIR}/.bashrc.d \
-    /workspaces \
- && chown -R ${DEVUSER}:${DEVUSER} ${MAINDIR} \
- && chown -R ${DEVUSER}:${DEVUSER} /workspaces
+ && chown -R ${DEVUSER}:${DEVUSER} ${MAINDIR}
 
 # set user
 USER ${DEVUSER}
-
-# test label to see if this fixes directory access issue
-LABEL "devcontainer.settings"='{"workspaceFolder": "/workspaces", "remoteUser": "devuser"}'
-
-# set workdir
-WORKDIR ${MAINDIR}
 
 # download dotfiles
 RUN git clone https://github.com/cjn4825/.dotfiles \
