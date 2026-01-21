@@ -25,6 +25,8 @@ RUN dnf update -y && dnf install -y \
     nodejs \
     ripgrep \
     fd-find \
+    man-db \
+    man-pages \
     && dnf clean all
 
 # creates build time variable for user's name
