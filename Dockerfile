@@ -57,6 +57,6 @@ RUN git clone https://github.com/cjn4825/.dotfiles \
 RUN ${MAINDIR}/.dotfiles/scripts/bootstrap.sh
 
 # set working dir to workspaces
-WORKDIR=${MAINDIR}/workspaces
+WORKDIR ${MAINDIR}/workspaces
 
 CMD ["bash"]
