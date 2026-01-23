@@ -1,5 +1,8 @@
 FROM fedora:43
 
+# Comments out the 'tsfLags=nodocs' setting in /etc/dnf/dnf/conf so man pages can be installed
+RUN sed -i '/tsflags=nodocs/s/^/#/' /etc/dnf/dnf.conf
+
 # update system and install dependencies
 RUN dnf update -y && dnf install -y \
     bash \
@@ -11,24 +14,28 @@ RUN dnf update -y && dnf install -y \
     unzip \
     tar \
     gzip \
+    gtar \
     xz \
     make \
     gcc \
     shellcheck \
+    luarocks \
     python3 \
+    pip3 \
     procps-ng \
     util-linux \
     iproute \
-    wl-copy \
     iputils \
     ca-certificates \
     nodejs \
     ripgrep \
     fd-find \
-    man-db \
+    man \
     man-pages \
-    mandoc \
     && dnf clean all
+
+# install jsregexp dependency for lualine in neovim
+RUN luarocks install jsregexp
 
 # creates build time variable for user's name
 ARG DEVUSER=devuser
@@ -62,4 +69,8 @@ RUN ${MAINDIR}/.dotfiles/scripts/bootstrap.sh
 # set working dir to workspaces
 WORKDIR ${MAINDIR}/workspaces
 
-CMD ["bash"]
+# start in tmux test
+RUN tmux
+
+# commented out for testing to see if i don't need this
+#CMD ["bash"]
