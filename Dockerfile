@@ -69,8 +69,8 @@ RUN ${MAINDIR}/.dotfiles/scripts/bootstrap.sh
 # set working dir to workspaces
 WORKDIR ${MAINDIR}/workspaces
 
-# start in tmux test
-RUN tmux
+# start in tmux after the image is build/ran
+CMD ["tmux"]
 
 # commented out for testing to see if i don't need this
 #CMD ["bash"]
