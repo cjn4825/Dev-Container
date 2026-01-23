@@ -21,7 +21,7 @@ RUN dnf update -y && dnf install -y \
     shellcheck \
     luarocks \
     python3 \
-    pip3 \
+    python3-pip \
     procps-ng \
     util-linux \
     iproute \
@@ -69,8 +69,4 @@ RUN ${MAINDIR}/.dotfiles/scripts/bootstrap.sh
 # set working dir to workspaces
 WORKDIR ${MAINDIR}/workspaces
 
-# start in tmux after the image is build/ran
-CMD ["tmux"]
-
-# commented out for testing to see if i don't need this
-#CMD ["bash"]
+CMD ["bash"]
