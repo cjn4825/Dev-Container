@@ -1,42 +1,5 @@
 FROM fedora:43
 
-# Comments out the 'tsfLags=nodocs' setting in /etc/dnf/dnf/conf so man pages can be installed
-RUN sed -i '/tsflags=nodocs/s/^/#/' /etc/dnf/dnf.conf
-
-# update system and install dependencies
-RUN dnf update -y && dnf install -y \
-    bash \
-    neovim \
-    git \
-    curl \
-    tmux \
-    wget \
-    unzip \
-    tar \
-    gzip \
-    gtar \
-    xz \
-    make \
-    gcc \
-    shellcheck \
-    luarocks \
-    python3 \
-    python3-pip \
-    procps-ng \
-    util-linux \
-    iproute \
-    iputils \
-    ca-certificates \
-    nodejs \
-    ripgrep \
-    fd-find \
-    man \
-    man-pages \
-    && dnf clean all
-
-# install jsregexp dependency for lualine in neovim
-RUN luarocks install jsregexp
-
 # creates build time variable for user's name
 ARG DEVUSER=devuser
 ARG MAINDIR=/home/${DEVUSER}
@@ -51,8 +14,6 @@ RUN groupadd -g ${DEVGID} ${DEVUSER} \
 
 # create directorys and give user ownership
 RUN mkdir -p \
-    ${MAINDIR}/.config \
-    ${MAINDIR}/.bashrc.d \
     ${MAINDIR}/workspaces \
  && chown -R ${DEVUSER}:${DEVUSER} ${MAINDIR}
 
