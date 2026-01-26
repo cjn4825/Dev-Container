@@ -14,6 +14,7 @@ RUN groupadd -g ${DEVGID} ${DEVUSER} \
 
 # create directorys and give user ownership
 RUN mkdir -p \
+    ${MAINDIR}/.dotfiles \
     ${MAINDIR}/workspaces \
  && chown -R ${DEVUSER}:${DEVUSER} ${MAINDIR}
 
