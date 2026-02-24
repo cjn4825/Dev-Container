@@ -1,6 +1,6 @@
 # Docker Container for dev work
 
-I plan on deleting this later since my workflow does not need a dockerfile anymore. I'm keeping this just, I have the git history to look at...
+I plan on deleting this later since my workflow does not need a dockerfile anymore. I'm keeping this for now since I might need the .github/workflows file as reference in the future.
 
 This project includes a dockerfile that can easily be turned into an image with dependencies already installed(as of now there isn't much, but its a work in progress for personal use, but this can be easly adapted to other uses also)
 
@@ -25,6 +25,7 @@ cd Dev-Container
 sudo docker build -t <image-name> .
 sudo doker run -it <image-name>
 ```
+
 
 
 
